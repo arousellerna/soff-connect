@@ -3,8 +3,25 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import { AuthProvider } from "@/hooks/useAuth";
+
+// Layouts
+import { PublicLayout } from "@/components/layout/PublicLayout";
+import { PrivateLayout } from "@/components/layout/PrivateLayout";
+
+// Public Pages
+import Landing from "@/pages/Landing";
+import Education from "@/pages/Education";
+import About from "@/pages/About";
+import Login from "@/pages/Login";
+import NotFound from "@/pages/NotFound";
+
+// Private Pages
+import MemberDashboard from "@/pages/MemberDashboard";
+import MemberOnboarding from "@/pages/MemberOnboarding";
+import MemberGroups from "@/pages/MemberGroups";
+import MemberProfile from "@/pages/MemberProfile";
+import PocGuide from "@/pages/PocGuide";
 
 const queryClient = new QueryClient();
 
@@ -13,13 +30,33 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public Routes with Public Layout */}
+            <Route element={<PublicLayout />}>
+              <Route path="/" element={<Landing />} />
+              <Route path="/utbildning" element={<Education />} />
+              <Route path="/om-oss" element={<About />} />
+            </Route>
+
+            {/* Login Page (standalone) */}
+            <Route path="/login" element={<Login />} />
+
+            {/* Private Routes with Private Layout */}
+            <Route element={<PrivateLayout />}>
+              <Route path="/medlem" element={<MemberDashboard />} />
+              <Route path="/medlem/onboarding" element={<MemberOnboarding />} />
+              <Route path="/medlem/grupper" element={<MemberGroups />} />
+              <Route path="/medlem/profil" element={<MemberProfile />} />
+              <Route path="/medlem/poc-guide" element={<PocGuide />} />
+            </Route>
+
+            {/* Catch-all 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
