@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
-import { Shield, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { InfoAlert } from "@/components/ui/InfoAlert";
+import soffLogoFull from "@/assets/soff-logo-full.png";
 
 export default function UpdatePassword() {
   const { updatePassword } = useAuth();
@@ -42,10 +43,12 @@ export default function UpdatePassword() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-muted/30 to-muted/50 p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <Shield className="h-10 w-10 text-primary" />
-          </div>
-          <h1 className="font-display text-2xl font-bold text-primary">Välj nytt lösenord</h1>
+          <img 
+            src={soffLogoFull} 
+            alt="SOFF - Säkerhets- och försvarsföretagen" 
+            className="h-14 w-auto mx-auto mb-4"
+          />
+          <h1 className="font-display text-2xl font-bold text-foreground">Välj nytt lösenord</h1>
         </div>
 
         <Card>

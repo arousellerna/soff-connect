@@ -1,9 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, LogOut, User, LayoutDashboard, Menu, X } from "lucide-react";
+import { LogOut, User, LayoutDashboard, Menu, X } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import soffLogoIcon from "@/assets/soff-logo-icon.png";
 
 export function PrivateHeader() {
   const { signOut, profile } = useAuth();
@@ -18,12 +19,16 @@ export function PrivateHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-primary text-primary-foreground border-b border-navy-light">
+    <header className="sticky top-0 z-50 bg-sidebar text-sidebar-foreground border-b border-sidebar-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/medlem" className="flex items-center gap-2 group">
-            <Shield className="h-8 w-8 text-gold group-hover:text-gold-dark transition-colors" />
+          <Link to="/medlem" className="flex items-center gap-3 group">
+            <img 
+              src={soffLogoIcon} 
+              alt="SOFF" 
+              className="h-9 w-9"
+            />
             <span className="font-display text-xl font-bold">SOFF</span>
           </Link>
 
