@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      events: {
+        Row: {
+          created_at: string
+          date: string
+          description: string | null
+          id: string
+          location: string | null
+          registration_url: string | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          registration_url?: string | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          description?: string | null
+          id?: string
+          location?: string | null
+          registration_url?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       lessons: {
         Row: {
           content_text: string | null
@@ -75,6 +105,33 @@ export type Database = {
           description?: string | null
           id?: string
           order_index?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      news: {
+        Row: {
+          author_name: string | null
+          content: string | null
+          created_at: string
+          excerpt: string
+          id: string
+          title: string
+        }
+        Insert: {
+          author_name?: string | null
+          content?: string | null
+          created_at?: string
+          excerpt: string
+          id?: string
+          title: string
+        }
+        Update: {
+          author_name?: string | null
+          content?: string | null
+          created_at?: string
+          excerpt?: string
+          id?: string
           title?: string
         }
         Relationships: []

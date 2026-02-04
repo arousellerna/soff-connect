@@ -5,9 +5,11 @@ import { useToast } from "@/hooks/use-toast";
 
 interface Profile {
   id: string;
-  email: string;
+  user_id: string;
   company_name: string;
   onboarding_status: "new" | "in_progress" | "completed";
+  created_at: string;
+  updated_at: string;
 }
 
 interface AuthContextType {
