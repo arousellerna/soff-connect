@@ -12,12 +12,13 @@ import { useAuth } from "@/hooks/useAuth";
 import { Shield, Loader2, ArrowLeft } from "lucide-react";
 import { InfoAlert } from "@/components/ui/InfoAlert";
 
-// Validation Schemas
+// Valideringsschema för login
 const loginSchema = z.object({
   email: z.string().email("Ogiltig e-postadress"),
   password: z.string().min(1, "Lösenord krävs"),
 });
 
+// Valideringsschema för registrering
 const registerSchema = z.object({
   companyName: z.string().min(2, "Företagsnamn måste vara minst 2 tecken"),
   email: z.string().email("Ogiltig e-postadress"),
@@ -29,7 +30,7 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  // Forms
+  // Forms setup
   const loginForm = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
@@ -48,17 +49,24 @@ export default function Login() {
     );
   }
 
-  if (user) return <Navigate to="/medlem" replace />;
+  if (user) {
+    return <Navigate to="/medlem" replace />;
+  }
 
+  // Login handler
   async function onLogin(values: z.infer<typeof loginSchema>) {
     setError(null);
     const { error } = await signIn(values.email, values.password);
-    if (error) setError("Felaktig e-postadress eller lösenord. Försök igen.");
+    if (error) {
+      setError("Felaktig e-postadress eller lösenord. Försök igen.");
+    }
   }
 
+  // Register handler
   async function onRegister(values: z.infer<typeof registerSchema>) {
     setError(null);
     setSuccess(null);
+
     const { error } = await signUp(values.email, values.password, values.companyName);
     
     if (error) {
@@ -71,14 +79,21 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
+      {/* Header */}
       <header className="p-4">
-        <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-          <ArrowLeft className="h-4 w-4" /> Tillbaka till startsidan
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Tillbaka till startsidan
         </Link>
       </header>
 
+      {/* Main Content */}
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
+          {/* Logo */}
           <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 mb-4">
               <Shield className="h-10 w-10 text-primary" />
@@ -90,7 +105,9 @@ export default function Login() {
           <Card className="border-border shadow-lg">
             <CardHeader>
               <CardTitle className="font-display text-xl">Välkommen</CardTitle>
-              <CardDescription>Logga in eller registrera ditt företag.</CardDescription>
+              <CardDescription>
+                Logga in eller registrera ditt företag för att få tillgång till medlemsportalen.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="login" className="w-full">
@@ -99,8 +116,17 @@ export default function Login() {
                   <TabsTrigger value="register">Registrera</TabsTrigger>
                 </TabsList>
 
-                {error && <InfoAlert variant="error" className="mb-4">{error}</InfoAlert>}
-                {success && <InfoAlert variant="success" className="mb-4">{success}</InfoAlert>}
+                {error && (
+                  <InfoAlert variant="error" className="mb-4">
+                    {error}
+                  </InfoAlert>
+                )}
+
+                {success && (
+                  <InfoAlert variant="success" className="mb-4">
+                    {success}
+                  </InfoAlert>
+                )}
 
                 <TabsContent value="login">
                   <Form {...loginForm}>
@@ -111,7 +137,9 @@ export default function Login() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>E-postadress</FormLabel>
-                            <FormControl><Input placeholder="namn@foretag.se" {...field} /></FormControl>
+                            <FormControl>
+                              <Input placeholder="namn@foretag.se" {...field} />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -121,14 +149,31 @@ export default function Login() {
                         name="password"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Lösenord</FormLabel>
-                            <FormControl><Input type="password" placeholder="••••••••" {...field} /></FormControl>
+                            <div className="flex items-center justify-between">
+                              <FormLabel>Lösenord</FormLabel>
+                              <Link 
+                                to="/forgot-password" 
+                                className="text-sm font-medium text-primary hover:underline"
+                              >
+                                Glömt lösenord?
+                              </Link>
+                            </div>
+                            <FormControl>
+                              <Input type="password" placeholder="••••••••" {...field} />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
                       <Button type="submit" className="w-full" disabled={loginForm.formState.isSubmitting}>
-                        {loginForm.formState.isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loggar in...</> : "Logga in"}
+                        {loginForm.formState.isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Loggar in...
+                          </>
+                        ) : (
+                          "Logga in"
+                        )}
                       </Button>
                     </form>
                   </Form>
@@ -143,7 +188,9 @@ export default function Login() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Företagsnamn</FormLabel>
-                            <FormControl><Input placeholder="Ditt företag AB" {...field} /></FormControl>
+                            <FormControl>
+                              <Input placeholder="Ditt företag AB" {...field} />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -154,7 +201,9 @@ export default function Login() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>E-postadress</FormLabel>
-                            <FormControl><Input placeholder="namn@foretag.se" {...field} /></FormControl>
+                            <FormControl>
+                              <Input placeholder="namn@foretag.se" {...field} />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -165,13 +214,22 @@ export default function Login() {
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Lösenord</FormLabel>
-                            <FormControl><Input type="password" placeholder="Minst 6 tecken" {...field} /></FormControl>
+                            <FormControl>
+                              <Input type="password" placeholder="Minst 6 tecken" {...field} />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
                       <Button type="submit" className="w-full" disabled={registerForm.formState.isSubmitting}>
-                        {registerForm.formState.isSubmitting ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Skapar konto...</> : "Skapa konto"}
+                        {registerForm.formState.isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Skapar konto...
+                          </>
+                        ) : (
+                          "Skapa konto"
+                        )}
                       </Button>
                     </form>
                   </Form>
