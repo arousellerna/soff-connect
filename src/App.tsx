@@ -45,6 +45,7 @@ const App = () => (
             {/* Login & Auth Pages (standalone) */}
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/update-password" element={<UpdatePassword />} />
 
             {/* Private Routes with Private Layout */}
             <Route element={<PrivateLayout />}>
@@ -53,9 +54,6 @@ const App = () => (
               <Route path="/medlem/grupper" element={<MemberGroups />} />
               <Route path="/medlem/profil" element={<MemberProfile />} />
               <Route path="/medlem/poc-guide" element={<PocGuide />} />
-              
-              {/* Sidan man hamnar på efter att ha klickat på länken i mailet */}
-              <Route path="/update-password" element={<UpdatePassword />} />
             </Route>
 
             {/* Catch-all 404 */}
