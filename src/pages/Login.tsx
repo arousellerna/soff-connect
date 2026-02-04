@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useAuth } from "@/hooks/useAuth";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 import { InfoAlert } from "@/components/ui/InfoAlert";
 import soffLogoFull from "@/assets/soff-logo-full.png";
 
@@ -71,7 +71,17 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-muted/30 p-4 items-center justify-center">
+    <div className="min-h-screen flex flex-col bg-muted/30 p-4 items-center justify-center relative">
+      {/* Back to Start Button */}
+      <div className="absolute top-4 left-4 md:top-8 md:left-8">
+        <Button variant="ghost" asChild>
+          <Link to="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
+            <ArrowLeft className="h-4 w-4" />
+            Tillbaka till startsidan
+          </Link>
+        </Button>
+      </div>
+
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center mb-8">
