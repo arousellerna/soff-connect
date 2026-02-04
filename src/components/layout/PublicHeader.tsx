@@ -37,7 +37,7 @@ export function PublicHeader() {
             </Link>
           </nav>
 
-          {/* Login Button - Fixed visibility with explicit colors */}
+          {/* Login Button - Fix: Explicit colors to ensure visibility */}
           <div className="hidden md:block">
             <Button asChild variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90">
               <Link to="/login">Logga in till Medlemsportalen</Link>
