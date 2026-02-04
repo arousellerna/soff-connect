@@ -9,8 +9,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useAuth } from "@/hooks/useAuth";
-import { Shield, Loader2, ArrowLeft } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { InfoAlert } from "@/components/ui/InfoAlert";
+import soffLogoFull from "@/assets/soff-logo-full.png";
 
 const loginSchema = z.object({
   email: z.string().email("Ogiltig e-postadress"),
@@ -72,9 +73,18 @@ export default function Login() {
   return (
     <div className="min-h-screen flex flex-col bg-muted/30 p-4 items-center justify-center">
       <div className="w-full max-w-md">
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <img 
+            src={soffLogoFull} 
+            alt="SOFF - Säkerhets- och försvarsföretagen" 
+            className="h-16 w-auto"
+          />
+        </div>
+        
         <Card>
           <CardHeader>
-            <CardTitle>Välkommen till SOFF</CardTitle>
+            <CardTitle>Medlemsportalen</CardTitle>
             <CardDescription>Logga in eller registrera konto.</CardDescription>
           </CardHeader>
           <CardContent>

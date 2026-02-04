@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import soffLogoFull from "@/assets/soff-logo-full.png";
 
 export function PublicHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,11 +13,12 @@ export function PublicHeader() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <Shield className="h-8 w-8 text-primary group-hover:text-navy-light transition-colors" />
-            <span className="font-display text-xl font-bold text-primary">
-              SOFF
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={soffLogoFull} 
+              alt="SOFF - Säkerhets- och försvarsföretagen" 
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

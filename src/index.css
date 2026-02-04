@@ -7,105 +7,114 @@
 
 @layer base {
   :root {
-    /* Core Colors - Deep Navy & Steel Grey */
+    /* Core Colors - Based on SOFF Logo */
     --background: 210 20% 98%;
-    --foreground: 220 40% 13%;
+    --foreground: 210 25% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 40% 13%;
+    --card-foreground: 210 25% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 13%;
+    --popover-foreground: 210 25% 20%;
 
-    /* Primary - Deep Navy Blue (SOFF Branding) */
-    --primary: 220 60% 20%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - SOFF Steel Blue (globe lines) */
+    --primary: 200 35% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Secondary - Steel Grey */
-    --secondary: 215 20% 65%;
-    --secondary-foreground: 220 40% 13%;
+    /* Secondary - Darker Steel Blue */
+    --secondary: 200 30% 75%;
+    --secondary-foreground: 210 25% 20%;
 
     /* Muted surfaces */
-    --muted: 215 25% 93%;
-    --muted-foreground: 220 15% 45%;
+    --muted: 200 20% 94%;
+    --muted-foreground: 200 15% 45%;
 
-    /* Accent - Signal Yellow/Gold */
-    --accent: 45 95% 55%;
-    --accent-foreground: 220 40% 13%;
+    /* Accent - SOFF Gold/Yellow (eye center) */
+    --accent: 45 85% 55%;
+    --accent-foreground: 210 25% 15%;
 
     /* Destructive */
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
     /* Borders & Inputs */
-    --border: 215 25% 88%;
-    --input: 215 25% 88%;
-    --ring: 220 60% 20%;
+    --border: 200 20% 88%;
+    --input: 200 20% 88%;
+    --ring: 200 35% 55%;
 
     --radius: 0.5rem;
 
-    /* Sidebar - Slightly darker for contrast */
-    --sidebar-background: 220 30% 15%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 45 95% 55%;
-    --sidebar-primary-foreground: 220 40% 13%;
-    --sidebar-accent: 220 25% 22%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 220 25% 25%;
-    --sidebar-ring: 45 95% 55%;
+    /* Sidebar - Deep navy for contrast */
+    --sidebar-background: 210 30% 18%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 45 85% 55%;
+    --sidebar-primary-foreground: 210 25% 15%;
+    --sidebar-accent: 210 25% 25%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 210 25% 28%;
+    --sidebar-ring: 45 85% 55%;
 
-    /* Custom tokens for SOFF */
-    --navy: 220 60% 20%;
-    --navy-light: 220 45% 30%;
-    --navy-dark: 220 65% 12%;
-    --steel: 215 20% 65%;
-    --steel-light: 215 20% 85%;
-    --gold: 45 95% 55%;
-    --gold-dark: 40 90% 45%;
+    /* Custom tokens for SOFF branding */
+    --soff-blue: 200 35% 55%;
+    --soff-blue-light: 200 40% 70%;
+    --soff-blue-dark: 200 35% 45%;
+    --soff-gold: 45 85% 55%;
+    --soff-gold-dark: 40 80% 45%;
+    --soff-navy: 210 30% 18%;
+    --soff-navy-light: 210 25% 28%;
+
+    /* Legacy tokens (for compatibility) */
+    --navy: 210 30% 18%;
+    --navy-light: 210 25% 28%;
+    --navy-dark: 210 35% 12%;
+    --steel: 200 30% 65%;
+    --steel-light: 200 25% 85%;
+    --gold: 45 85% 55%;
+    --gold-dark: 40 80% 45%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(220 60% 20%) 0%, hsl(220 45% 30%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(45 95% 55%) 0%, hsl(40 90% 45%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(215 25% 93%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(210 30% 18%) 0%, hsl(200 35% 45%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(45 85% 55%) 0%, hsl(40 80% 45%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(210 20% 98%) 0%, hsl(200 20% 94%) 100%);
   }
 
   .dark {
-    --background: 220 30% 10%;
-    --foreground: 210 40% 98%;
+    --background: 210 30% 10%;
+    --foreground: 0 0% 98%;
 
-    --card: 220 30% 13%;
-    --card-foreground: 210 40% 98%;
+    --card: 210 30% 13%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 30% 13%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 210 30% 13%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 45 95% 55%;
-    --primary-foreground: 220 40% 13%;
+    --primary: 200 40% 60%;
+    --primary-foreground: 210 30% 10%;
 
-    --secondary: 220 25% 25%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 25% 25%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 25% 20%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 210 25% 20%;
+    --muted-foreground: 200 20% 65%;
 
-    --accent: 45 95% 55%;
-    --accent-foreground: 220 40% 13%;
+    --accent: 45 85% 55%;
+    --accent-foreground: 210 30% 10%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 25% 20%;
-    --input: 220 25% 20%;
-    --ring: 45 95% 55%;
+    --border: 210 25% 20%;
+    --input: 210 25% 20%;
+    --ring: 200 40% 60%;
 
-    --sidebar-background: 220 35% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 45 95% 55%;
-    --sidebar-primary-foreground: 220 40% 13%;
-    --sidebar-accent: 220 30% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 220 25% 18%;
-    --sidebar-ring: 45 95% 55%;
+    --sidebar-background: 210 35% 8%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 45 85% 55%;
+    --sidebar-primary-foreground: 210 30% 10%;
+    --sidebar-accent: 210 30% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 210 25% 18%;
+    --sidebar-ring: 45 85% 55%;
   }
 }
 

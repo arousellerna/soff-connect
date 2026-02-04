@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
-import { Shield, Loader2, ArrowLeft } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 import { InfoAlert } from "@/components/ui/InfoAlert";
+import soffLogoFull from "@/assets/soff-logo-full.png";
 
 export default function ForgotPassword() {
   const { resetPassword } = useAuth();
@@ -42,10 +43,11 @@ export default function ForgotPassword() {
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 mb-4">
-              <Shield className="h-10 w-10 text-primary" />
-              <span className="font-display text-2xl font-bold text-primary">SOFF</span>
-            </div>
+            <img 
+              src={soffLogoFull} 
+              alt="SOFF - Säkerhets- och försvarsföretagen" 
+              className="h-14 w-auto mx-auto mb-4"
+            />
             <p className="text-muted-foreground">Medlemsportalen</p>
           </div>
 
