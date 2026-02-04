@@ -37,9 +37,9 @@ export function PublicHeader() {
             </Link>
           </nav>
 
-          {/* Login Button */}
+          {/* Login Button - Fixed visibility with explicit colors */}
           <div className="hidden md:block">
-            <Button asChild variant="default">
+            <Button asChild variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90">
               <Link to="/login">Logga in till Medlemsportalen</Link>
             </Button>
           </div>
@@ -81,7 +81,7 @@ export function PublicHeader() {
               Om oss
             </Link>
             <div className="pt-2 px-4">
-              <Button asChild className="w-full">
+              <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
                   Logga in till Medlemsportalen
                 </Link>
