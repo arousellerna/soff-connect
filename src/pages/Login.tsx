@@ -98,6 +98,11 @@ export default function Login() {
                     <FormField control={loginForm.control} name="password" render={({ field }) => (
                       <FormItem><FormLabel>Lösenord</FormLabel><FormControl><Input type="password" {...field} /></FormControl><FormMessage /></FormItem>
                     )} />
+                    <div className="flex items-center justify-between">
+                      <Link to="/forgot-password" className="text-sm text-primary hover:underline">
+                        Glömt lösenord?
+                      </Link>
+                    </div>
                     <Button type="submit" className="w-full">Logga in</Button>
                   </form>
                 </Form>
