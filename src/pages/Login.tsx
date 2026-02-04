@@ -51,15 +51,20 @@ export default function Login() {
     setError(null);
     setSuccess(null);
 
-    // Här anropas Supabase
     const { error } = await signUp(values.email, values.password, values.companyName);
     
     if (error) {
       console.error("Supabase Error:", error);
-      // HÄR ÄR NYCKELN: Vi visar det exakta felet från Supabase
-      setError("TEKNISKT FEL: " + (error.message || "Okänt fel"));
+      // Show the actual error message from Supabase for debugging
+      if (error.message?.includes("already registered")) {
+        setError("E-postadressen är redan registrerad.");
+      } else if (error.message?.includes("Password")) {
+        setError("Lösenordet uppfyller inte kraven: " + error.message);
+      } else {
+        setError(error.message || "Ett oväntat fel uppstod. Försök igen.");
+      }
     } else {
-      setSuccess("Konto skapat! Du kan nu logga in.");
+      setSuccess("Konto skapat! Kontrollera din e-post för att verifiera kontot.");
       registerForm.reset();
     }
   }
@@ -79,13 +84,8 @@ export default function Login() {
                 <TabsTrigger value="register">Nytt konto</TabsTrigger>
               </TabsList>
 
-              {/* Felmeddelande-rutan */}
-              {error && (
-                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-                  <strong className="font-bold">Ett fel uppstod!</strong>
-                  <span className="block sm:inline"> {error}</span>
-                </div>
-              )}
+              {/* Felmeddelande */}
+              {error && <InfoAlert variant="error" className="mb-4">{error}</InfoAlert>}
 
               {success && <InfoAlert variant="success" className="mb-4">{success}</InfoAlert>}
 
