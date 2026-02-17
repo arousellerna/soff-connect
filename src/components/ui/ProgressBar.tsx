@@ -15,7 +15,8 @@ export function ProgressBar({
   showLabel = true,
   label,
 }: ProgressBarProps) {
-  const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
+  // Lägg till en kontroll som förhindrar delning med noll om 'max' är 0
+  const percentage = max > 0 ? Math.min(Math.max((value / max) * 100, 0), 100) : 0;
 
   return (
     <div className={cn("w-full", className)}>
