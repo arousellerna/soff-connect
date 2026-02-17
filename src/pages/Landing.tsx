@@ -65,7 +65,7 @@ export default function Landing() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 text-base"
+                className="border-primary-foreground text-primary-foreground bg-primary-foreground/15 hover:bg-primary-foreground/25 text-base"
               >
                 <Link to="/login">Logga in som medlem</Link>
               </Button>
