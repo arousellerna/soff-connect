@@ -55,7 +55,6 @@ export default function Login() {
     const { error } = await signUp(values.email, values.password, values.companyName);
     
     if (error) {
-      console.error("Supabase Error:", error.message);
       // Show the actual error message from Supabase for debugging
       if (error.message?.includes("already registered")) {
         setError("E-postadressen är redan registrerad.");
