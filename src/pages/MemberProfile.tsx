@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { InfoAlert } from "@/components/ui/InfoAlert";
 import { supabase } from "@/integrations/supabase/client";
-import { User, Building2, Mail, Calendar, Loader2, CheckCircle } from "lucide-react";
+import { User, Building2, Mail, Loader2, CheckCircle } from "lucide-react";
 
 export default function MemberProfile() {
   const { user, profile } = useAuth();
