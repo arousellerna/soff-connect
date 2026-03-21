@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Session, User } from "@supabase/supabase-js";
+import { Session, User, AuthError } from "@supabase/supabase-js";
 import { useToast } from "@/hooks/use-toast";
 
 interface Profile {
@@ -17,11 +17,11 @@ interface AuthContextType {
   user: User | null;
   profile: Profile | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signUp: (email: string, password: string, companyName: string) => Promise<{ error: any }>;
+  signIn: (email: string, password: string) => Promise<{ error: AuthError | null }>;
+  signUp: (email: string, password: string, companyName: string) => Promise<{ error: AuthError | null }>;
   signOut: () => Promise<void>;
-  resetPassword: (email: string) => Promise<{ error: any }>; // Ny funktion
-  updatePassword: (password: string) => Promise<{ error: any }>; // Ny funktion
+  resetPassword: (email: string) => Promise<{ error: AuthError | null }>; // Ny funktion
+  updatePassword: (password: string) => Promise<{ error: AuthError | null }>; // Ny funktion
   updateOnboardingStatus: (status: Profile["onboarding_status"]) => Promise<void>;
 }
 
@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (error) throw error;
       setProfile(data as Profile);
     } catch (error) {
-      console.error("Error fetching profile:", error);
+      // Error fetching profile is ignored
     } finally {
       setLoading(false);
     }

@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { PublicHeader } from "./PublicHeader";
 
 export function PublicLayout() {
@@ -18,9 +18,9 @@ export function PublicLayout() {
               <a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Kontakt
               </a>
-              <a href="#" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              <Link to="/integritetspolicy" className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
                 Integritetspolicy
-              </a>
+              </Link>
             </nav>
           </div>
         </div>

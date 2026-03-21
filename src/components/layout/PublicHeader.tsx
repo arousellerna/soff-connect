@@ -4,9 +4,12 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import soffLogoFull from "@/assets/soff-logo-full.png";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export function PublicHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -27,13 +30,13 @@ export function PublicHeader() {
               to="/utbildning"
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
-              Utbildning
+              {t("utbildning")}
             </Link>
             <Link
               to="/om-oss"
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
-              Om oss
+              {t("omOss")}
             </Link>
           </nav>
 
@@ -66,24 +69,27 @@ export function PublicHeader() {
           )}
         >
           <nav className="flex flex-col gap-2 pt-4">
+            <div className="px-4 py-2">
+              <LanguageSwitcher />
+            </div>
             <Link
               to="/utbildning"
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Utbildning
+              {t("utbildning")}
             </Link>
             <Link
               to="/om-oss"
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-muted rounded-lg transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Om oss
+              {t("omOss")}
             </Link>
             <div className="pt-2 px-4">
               <Button asChild className="w-full bg-navy text-white hover:bg-navy/90">
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                  Logga in till Medlemsportalen
+                  {t("loggaIn")}
                 </Link>
               </Button>
             </div>

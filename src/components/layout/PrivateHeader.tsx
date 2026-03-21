@@ -5,17 +5,20 @@ import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import soffLogoIcon from "@/assets/soff-logo-icon.png";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 export function PrivateHeader() {
   const { signOut, profile } = useAuth();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   const isActive = (path: string) => location.pathname === path;
 
   const navLinks = [
-    { to: "/medlem", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/medlem/profil", label: "Min Profil", icon: User },
+    { to: "/medlem", label: t("dashboard"), icon: LayoutDashboard },
+    { to: "/medlem/profil", label: t("minProfil"), icon: User },
   ];
 
   return (
@@ -55,12 +58,13 @@ export function PrivateHeader() {
               className="flex items-center gap-2 text-sm font-medium text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               <ExternalLink className="h-4 w-4" />
-              Gå till startsidan
+              {t("gaTillStartsidan")}
             </Link>
           </nav>
 
           {/* Company Name & Logout */}
           <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
             {profile?.company_name && (
               <span className="text-sm text-primary-foreground/70">
                 {profile.company_name}
@@ -73,7 +77,7 @@ export function PrivateHeader() {
               className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-navy-light"
             >
               <LogOut className="h-4 w-4 mr-2" />
-              Logga ut
+              {t("loggaUt")}
             </Button>
           </div>
 
@@ -99,6 +103,9 @@ export function PrivateHeader() {
           )}
         >
           <nav className="flex flex-col gap-2 pt-4">
+            <div className="px-4 py-2">
+              <LanguageSwitcher />
+            </div>
             {navLinks.map((link) => (
               <Link
                 key={link.to}
@@ -122,7 +129,7 @@ export function PrivateHeader() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <ExternalLink className="h-4 w-4" />
-              Gå till startsidan
+              {t("gaTillStartsidan")}
             </Link>
 
             <div className="pt-2 px-4 border-t border-navy-light mt-2">
@@ -138,7 +145,7 @@ export function PrivateHeader() {
                 className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-navy-light w-full justify-start"
               >
                 <LogOut className="h-4 w-4 mr-2" />
-                Logga ut
+                {t("loggaUt")}
               </Button>
             </div>
           </nav>
