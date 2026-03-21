@@ -29,9 +29,7 @@ export default function Education() {
   const { data: modulesData, isLoading: modulesLoading } = useQuery({
     queryKey: ['modules', 'external_market'],
     queryFn: async () => {
-      console.time('fetchModules');
       const { data } = await supabase.from("modules").select("*").eq("category", "external_market").order("order_index");
-      console.timeEnd('fetchModules');
       return data || [];
     }
   });
@@ -39,9 +37,7 @@ export default function Education() {
   const { data: lessonsData, isLoading: lessonsLoading } = useQuery({
     queryKey: ['lessons'],
     queryFn: async () => {
-      console.time('fetchLessons');
       const { data } = await supabase.from("lessons").select("*").order("order_index");
-      console.timeEnd('fetchLessons');
       return data || [];
     }
   });
@@ -50,12 +46,10 @@ export default function Education() {
     queryKey: ['user_progress', user?.id],
     queryFn: async () => {
       if (!user) return [];
-      console.time('fetchProgress');
       const { data } = await supabase
         .from("user_progress")
         .select("lesson_id")
         .eq("user_id", user.id);
-      console.timeEnd('fetchProgress');
       return data || [];
     },
     enabled: !!user,
