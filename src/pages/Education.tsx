@@ -21,6 +21,18 @@ interface Lesson {
   module_id: string;
 }
 
+const isLesson = (lesson: unknown): lesson is Lesson => {
+  return (
+    typeof lesson === "object" &&
+    lesson !== null &&
+    "id" in lesson && typeof (lesson as Record<string, unknown>).id === "string" &&
+    "title" in lesson && typeof (lesson as Record<string, unknown>).title === "string" &&
+    "order_index" in lesson && typeof (lesson as Record<string, unknown>).order_index === "number" &&
+    "video_url" in lesson && (typeof (lesson as Record<string, unknown>).video_url === "string" || (lesson as Record<string, unknown>).video_url === null) &&
+    "module_id" in lesson && typeof (lesson as Record<string, unknown>).module_id === "string"
+  );
+};
+
 export default function Education() {
   const { user } = useAuth(); // 2. Hämta inloggad användare
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
@@ -69,8 +81,8 @@ export default function Education() {
   }, [modulesData, expandedModules.size]);
 
   useEffect(() => {
-    if (lessonsData && lessonsData.length > 0 && !activeLesson) {
-      setActiveLesson(lessonsData[0] as unknown as Lesson);
+    if (lessonsData && lessonsData.length > 0 && !activeLesson && isLesson(lessonsData[0])) {
+      setActiveLesson(lessonsData[0]);
     }
   }, [lessonsData, activeLesson]);
 
@@ -80,8 +92,8 @@ export default function Education() {
 
   const loading = modulesLoading || lessonsLoading || (!!user && progressLoading);
 
-  const getLessonsByModule = (moduleId: string) => {
-    return lessonsData?.filter(lesson => (lesson as { module_id: string }).module_id === moduleId) || [];
+  const getLessonsByModule = (moduleId: string): Lesson[] => {
+    return lessonsData?.filter(isLesson).filter((lesson) => lesson.module_id === moduleId) || [];
   };
 
   // ... (funktionerna toggleModule, getLessonsByModule och renderContent förblir oförändrade) ...
@@ -99,19 +111,16 @@ export default function Education() {
         <div key={module.id}>
               {expandedModules.has(module.id) && (
                 <div className="pl-4 space-y-1">
-                  {getLessonsByModule(module.id).map((lesson) => {
-                    const typedLesson = lesson as unknown as Lesson;
-                    return (
-                      <LessonCard
-                        key={typedLesson.id}
-                        title={typedLesson.title}
-                        isActive={activeLesson?.id === typedLesson.id}
-                        isCompleted={completedLessonIds.has(typedLesson.id)} // 6. Markera som klar om ID:t hittades i databasen
-                        hasVideo={!!typedLesson.video_url}
-                        onClick={() => setActiveLesson(typedLesson)}
-                      />
-                    );
-                  })}
+                  {getLessonsByModule(module.id).map((lesson) => (
+                    <LessonCard
+                      key={lesson.id}
+                      title={lesson.title}
+                      isActive={activeLesson?.id === lesson.id}
+                      isCompleted={completedLessonIds.has(lesson.id)} // 6. Markera som klar om ID:t hittades i databasen
+                      hasVideo={!!lesson.video_url}
+                      onClick={() => setActiveLesson(lesson)}
+                    />
+                  ))}
                 </div>
               )}
         </div>
