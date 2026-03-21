@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { LessonCard } from "@/components/ui/LessonCard";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { Loader2, BookOpen, ChevronDown } from "lucide-react";
+import { BookOpen, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth"; // 1. Importera useAuth
 import { useQuery } from "@tanstack/react-query";
