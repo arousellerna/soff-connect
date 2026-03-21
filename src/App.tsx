@@ -16,6 +16,7 @@ import About from "@/pages/About";
 import Login from "@/pages/Login";
 import NotFound from "@/pages/NotFound";
 import ForgotPassword from "@/pages/ForgotPassword"; // NY SIDA
+import PrivacyPolicy from "@/pages/PrivacyPolicy";
 
 // Private Pages
 import MemberDashboard from "@/pages/MemberDashboard";
@@ -40,6 +41,7 @@ const App = () => (
               <Route path="/" element={<Landing />} />
               <Route path="/utbildning" element={<Education />} />
               <Route path="/om-oss" element={<About />} />
+              <Route path="/integritetspolicy" element={<PrivacyPolicy />} />
             </Route>
 
             {/* Login & Auth Pages (standalone) */}
