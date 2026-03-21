@@ -41,10 +41,9 @@ export function PublicHeader() {
           </nav>
 
           {/* Login Button - Fix: Explicit colors to ensure visibility */}
-          <div className="hidden md:flex items-center gap-4">
-            <LanguageSwitcher />
+          <div className="hidden md:block">
             <Button asChild variant="default" className="bg-navy text-white hover:bg-navy/90">
-              <Link to="/login">{t("loggaIn")}</Link>
+              <Link to="/login">Logga in till Medlemsportalen</Link>
             </Button>
           </div>
 
