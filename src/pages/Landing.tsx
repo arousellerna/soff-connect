@@ -1,36 +1,39 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, BookOpen, Users, Globe, ArrowRight, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function Landing() {
+  const { t } = useTranslation();
+
   const features = [
     {
       icon: BookOpen,
-      title: "Försvarsmarknaden",
-      description: "Förstå ekosystemet med OEMs, underleverantörer och slutkunder.",
+      title: t("forsvarsmarknaden"),
+      description: t("forsvarsmarknadenDesc"),
     },
     {
       icon: Shield,
-      title: "Regelverk",
-      description: "Lär dig om exportkontroll, säkerhetsskydd och internationella krav.",
+      title: t("regelverk"),
+      description: t("regelverkDesc"),
     },
     {
       icon: Globe,
-      title: "Affärsmöjligheter",
-      description: "Hitta evenemang, upphandlingar och nätverksmöjligheter.",
+      title: t("affarsmojligheter"),
+      description: t("affarsmojligheterDesc"),
     },
     {
       icon: Users,
-      title: "Medlemsportal",
-      description: "Exklusiva resurser och onboarding för SOFF-medlemmar.",
+      title: t("medlemsportal"),
+      description: t("medlemsportalDesc"),
     },
   ];
 
   const benefits = [
-    "Gratis tillgång till grundläggande utbildningsmaterial",
-    "Strukturerad kunskap om den svenska försvarsmarknaden",
-    "Vägledning genom regelverk och krav",
-    "Information om affärsmöjligheter och nätverk",
+    t("benefit1"),
+    t("benefit2"),
+    t("benefit3"),
+    t("benefit4"),
   ];
 
   return (
@@ -45,10 +48,10 @@ export default function Landing() {
               Säkerhets- och försvarsföretagen
             </div>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6 leading-tight">
-              Välkommen till försvarsmarknaden
+              {t("valkommen")}
             </h1>
             <p className="text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-              En utbildningsplattform för att förstå ekosystemet, aktörer och regelverk inom den svenska säkerhets- och försvarssektorn.
+              {t("valkommenDesc")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -57,7 +60,7 @@ export default function Landing() {
                 className="bg-gold text-accent-foreground hover:bg-gold-dark text-base px-8"
               >
                 <Link to="/utbildning">
-                  Starta Utbildningen
+                  {t("startaUtbildning")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
@@ -67,7 +70,7 @@ export default function Landing() {
                 variant="outline"
                 className="border-primary-foreground text-primary-foreground bg-primary-foreground/15 hover:bg-primary-foreground/25 text-base"
               >
-                <Link to="/login">Logga in som medlem</Link>
+                <Link to="/login">{t("loggaInMedlem")}</Link>
               </Button>
             </div>
           </div>
@@ -79,10 +82,10 @@ export default function Landing() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-              Vad du kommer lära dig
+              {t("vadDuKommerLaraDig")}
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Vår utbildningsplattform ger dig den kunskap du behöver för att navigera försvarsmarknaden.
+              {t("vadDuKommerLaraDigDesc")}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -112,12 +115,10 @@ export default function Landing() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="font-display text-3xl font-bold text-foreground mb-6">
-                Sänk trösklarna till försvarsmarknaden
+                {t("sankTrosklarna")}
               </h2>
               <p className="text-muted-foreground mb-8">
-                SOFF:s utbildningsplattform är öppen för alla som vill lära sig mer om 
-                den svenska säkerhets- och försvarssektorn. Oavsett om du är nyfiken 
-                på branschen eller vill ta ditt företag in på marknaden.
+                {t("sankTrosklarnaDesc")}
               </p>
               <ul className="space-y-4">
                 {benefits.map((benefit, index) => (
@@ -147,11 +148,10 @@ export default function Landing() {
       <section className="py-20 bg-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-display text-3xl font-bold text-primary-foreground mb-4">
-            Redo att börja?
+            {t("redoAttBorja")}
           </h2>
           <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-            Starta din resa mot försvarsmarknaden idag. Vår kostnadsfria utbildning 
-            ger dig grunderna du behöver.
+            {t("redoAttBorjaDesc")}
           </p>
           <Button
             asChild
@@ -159,7 +159,7 @@ export default function Landing() {
             className="bg-gold text-accent-foreground hover:bg-gold-dark"
           >
             <Link to="/utbildning">
-              Börja lära dig nu
+              {t("borjaLaraDigNu")}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
