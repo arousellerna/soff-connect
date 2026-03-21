@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { LessonCard } from "@/components/ui/LessonCard";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { Loader2, BookOpen, ChevronDown } from "lucide-react";
+import { Loader2, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/useAuth"; // 1. Importera useAuth
 import { useQuery } from "@tanstack/react-query";
@@ -30,9 +30,7 @@ export default function Education() {
   const { data: modulesData, isLoading: modulesLoading } = useQuery({
     queryKey: ['modules', 'external_market'],
     queryFn: async () => {
-      console.time('fetchModules');
       const { data } = await supabase.from("modules").select("*").eq("category", "external_market").order("order_index");
-      console.timeEnd('fetchModules');
       return data || [];
     }
   });
@@ -40,9 +38,7 @@ export default function Education() {
   const { data: lessonsData, isLoading: lessonsLoading } = useQuery({
     queryKey: ['lessons'],
     queryFn: async () => {
-      console.time('fetchLessons');
       const { data } = await supabase.from("lessons").select("*").order("order_index");
-      console.timeEnd('fetchLessons');
       return data || [];
     }
   });
@@ -51,12 +47,10 @@ export default function Education() {
     queryKey: ['user_progress', user?.id],
     queryFn: async () => {
       if (!user) return [];
-      console.time('fetchProgress');
       const { data } = await supabase
         .from("user_progress")
         .select("lesson_id")
         .eq("user_id", user.id);
-      console.timeEnd('fetchProgress');
       return data || [];
     },
     enabled: !!user,
@@ -78,19 +72,23 @@ export default function Education() {
     return new Set(progressData?.map(p => p.lesson_id) || []);
   }, [progressData]);
 
+  const lessonsByModule = useMemo(() => {
+    if (!lessonsData) return {};
+    return lessonsData.reduce((acc, lesson) => {
+      const moduleId = (lesson as unknown as Lesson).module_id;
+      if (!acc[moduleId]) {
+        acc[moduleId] = [];
+      }
+      acc[moduleId].push(lesson as unknown as Lesson);
+      return acc;
+    }, {} as Record<string, Lesson[]>);
+  }, [lessonsData]);
+
   const loading = modulesLoading || lessonsLoading || (!!user && progressLoading);
 
-  const getLessonsByModule = (moduleId: string) => {
-    return lessonsData?.filter(lesson => (lesson as { module_id: string }).module_id === moduleId) || [];
-  };
-
-  // ... (funktionerna toggleModule, getLessonsByModule och renderContent förblir oförändrade) ...
+  // ... (funktionerna toggleModule och renderContent förblir oförändrade) ...
 
   if (loading) { /* ... */ }
-
-  // 5. Uppdatera framstegen med de faktiskt slutförda lektionerna
-  const totalLessons = lessonsData?.length || 0;
-  const completedLessons = completedLessonIds.size; 
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex">
@@ -99,8 +97,7 @@ export default function Education() {
         <div key={module.id}>
               {expandedModules.has(module.id) && (
                 <div className="pl-4 space-y-1">
-                  {getLessonsByModule(module.id).map((lesson) => {
-                    const typedLesson = lesson as unknown as Lesson;
+                  {(lessonsByModule[module.id] || []).map((typedLesson) => {
                     return (
                       <LessonCard
                         key={typedLesson.id}
