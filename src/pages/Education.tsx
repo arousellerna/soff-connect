@@ -88,10 +88,6 @@ export default function Education() {
 
   if (loading) { /* ... */ }
 
-  // 5. Uppdatera framstegen med de faktiskt slutförda lektionerna
-  const totalLessons = lessonsData?.length || 0;
-  const completedLessons = completedLessonIds.size; 
-
   return (
     <div className="min-h-[calc(100vh-4rem)] flex">
       {/* ... Sidofält och ProgressBar ... */}
