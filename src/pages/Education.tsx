@@ -78,13 +78,21 @@ export default function Education() {
     return new Set(progressData?.map(p => p.lesson_id) || []);
   }, [progressData]);
 
+  const lessonsByModule = useMemo(() => {
+    if (!lessonsData) return {};
+    return lessonsData.reduce((acc, lesson) => {
+      const moduleId = (lesson as unknown as Lesson).module_id;
+      if (!acc[moduleId]) {
+        acc[moduleId] = [];
+      }
+      acc[moduleId].push(lesson as unknown as Lesson);
+      return acc;
+    }, {} as Record<string, Lesson[]>);
+  }, [lessonsData]);
+
   const loading = modulesLoading || lessonsLoading || (!!user && progressLoading);
 
-  const getLessonsByModule = (moduleId: string) => {
-    return lessonsData?.filter(lesson => (lesson as { module_id: string }).module_id === moduleId) || [];
-  };
-
-  // ... (funktionerna toggleModule, getLessonsByModule och renderContent förblir oförändrade) ...
+  // ... (funktionerna toggleModule och renderContent förblir oförändrade) ...
 
   if (loading) { /* ... */ }
 
@@ -99,8 +107,7 @@ export default function Education() {
         <div key={module.id}>
               {expandedModules.has(module.id) && (
                 <div className="pl-4 space-y-1">
-                  {getLessonsByModule(module.id).map((lesson) => {
-                    const typedLesson = lesson as unknown as Lesson;
+                  {(lessonsByModule[module.id] || []).map((typedLesson) => {
                     return (
                       <LessonCard
                         key={typedLesson.id}
