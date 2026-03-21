@@ -21,7 +21,9 @@ const loginSchema = z.object({
 const registerSchema = z.object({
   companyName: z.string().min(2, "Företagsnamn måste vara minst 2 tecken"),
   email: z.string().email("Ogiltig e-postadress"),
-  password: z.string().min(6, "Lösenordet måste vara minst 6 tecken"),
+  password: z.string()
+    .min(8, "Lösenordet måste vara minst 8 tecken")
+    .regex(/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, "Lösenordet måste innehålla minst en liten bokstav, en stor bokstav och en siffra"),
 });
 
 export default function Login() {

@@ -21,8 +21,14 @@ export default function UpdatePassword() {
     setIsSubmitting(true);
     setError(null);
 
-    if (password.length < 6) {
-      setError("Lösenordet måste vara minst 6 tecken.");
+    if (password.length < 8) {
+      setError("Lösenordet måste vara minst 8 tecken.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+      setError("Lösenordet måste innehålla minst en liten bokstav, en stor bokstav och en siffra.");
       setIsSubmitting(false);
       return;
     }
@@ -65,7 +71,7 @@ export default function UpdatePassword() {
                 <Input
                   id="password"
                   type="password"
-                  placeholder="Minst 6 tecken"
+                  placeholder="Minst 8 tecken"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
