@@ -34,20 +34,20 @@ describe('PrivateHeader', () => {
     vi.clearAllMocks();
 
     // Default mock implementations
-    (useAuth as any).mockReturnValue({
+    vi.mocked(useAuth).mockReturnValue({
       signOut: mockSignOut,
       profile: {
         company_name: 'Test Company AB',
       },
-    });
+    } as any);
 
-    (useLocation as any).mockReturnValue({
+    vi.mocked(useLocation).mockReturnValue({
       pathname: '/medlem',
-    });
+    } as any);
   });
 
   const renderComponent = (initialRoute = '/medlem') => {
-    (useLocation as any).mockReturnValue({ pathname: initialRoute });
+    vi.mocked(useLocation).mockReturnValue({ pathname: initialRoute } as any);
     return render(
       <MemoryRouter initialEntries={[initialRoute]}>
         <PrivateHeader />
@@ -120,10 +120,10 @@ describe('PrivateHeader', () => {
   });
 
   it('does not render company name if profile has no company name', () => {
-    (useAuth as any).mockReturnValue({
+    vi.mocked(useAuth).mockReturnValue({
       signOut: mockSignOut,
       profile: null,
-    });
+    } as any);
 
     renderComponent();
     expect(screen.queryByText('Test Company AB')).not.toBeInTheDocument();

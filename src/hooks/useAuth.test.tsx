@@ -28,18 +28,18 @@ describe("useAuth", () => {
 
   it("should handle error in fetchProfile gracefully and set loading to false", async () => {
     // Mock getSession to return a user so fetchProfile is called
-    (supabase.auth.getSession as any).mockResolvedValue({
+    vi.mocked(supabase.auth.getSession).mockResolvedValue({
       data: {
         session: {
           user: { id: "test-user-id" },
         },
       },
-    });
+    } as any);
 
     // Mock onAuthStateChange
-    (supabase.auth.onAuthStateChange as any).mockReturnValue({
+    vi.mocked(supabase.auth.onAuthStateChange).mockReturnValue({
       data: { subscription: { unsubscribe: vi.fn() } },
-    });
+    } as any);
 
     // Mock the chain for supabase.from("profiles").select("*").eq("id", userId).single()
     const mockSingle = vi.fn().mockResolvedValue({
@@ -48,7 +48,7 @@ describe("useAuth", () => {
     });
     const mockEq = vi.fn().mockReturnValue({ single: mockSingle });
     const mockSelect = vi.fn().mockReturnValue({ eq: mockEq });
-    (supabase.from as any).mockReturnValue({ select: mockSelect });
+    vi.mocked(supabase.from).mockReturnValue({ select: mockSelect } as any);
 
     const wrapper = ({ children }: { children: React.ReactNode }) => (
       <AuthProvider>{children}</AuthProvider>
