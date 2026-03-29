@@ -42,7 +42,7 @@ export function PublicHeader() {
 
           {/* Login Button - Fix: Explicit colors to ensure visibility */}
           <div className="hidden md:block">
-            <Button asChild variant="default" className="bg-navy text-white hover:bg-navy/90">
+            <Button asChild variant="default" className="bg-navy text-white hover:bg-navy/90" style={{ backgroundColor: 'hsl(210, 30%, 18%)', color: 'white' }}>
               <Link to="/login">Logga in till Medlemsportalen</Link>
             </Button>
           </div>
@@ -87,7 +87,7 @@ export function PublicHeader() {
               {t("omOss")}
             </Link>
             <div className="pt-2 px-4">
-              <Button asChild className="w-full bg-navy text-white hover:bg-navy/90">
+              <Button asChild className="w-full bg-navy text-white hover:bg-navy/90" style={{ backgroundColor: 'hsl(210, 30%, 18%)', color: 'white' }}>
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
                   {t("loggaIn")}
                 </Link>
