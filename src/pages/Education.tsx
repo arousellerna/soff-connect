@@ -44,7 +44,9 @@ export default function Education() {
     queryFn: async () => {
       const { data } = await supabase.from("modules").select("*").eq("category", "external_market").order("order_index");
       return data || [];
-    }
+    },
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 
   const { data: lessonsData, isLoading: lessonsLoading } = useQuery({
@@ -52,7 +54,9 @@ export default function Education() {
     queryFn: async () => {
       const { data } = await supabase.from("lessons").select("*").order("order_index");
       return data || [];
-    }
+    },
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 
   const { data: progressData, isLoading: progressLoading } = useQuery({
@@ -66,6 +70,8 @@ export default function Education() {
       return data || [];
     },
     enabled: !!user,
+    staleTime: 1 * 60 * 1000,
+    gcTime: 5 * 60 * 1000,
   });
 
   useEffect(() => {
