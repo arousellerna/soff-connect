@@ -36,6 +36,10 @@ describe("InfoAlert", () => {
     expect(div).toHaveClass("bg-primary/5");
     expect(div).toHaveClass("border-primary/20");
     expect(div).toHaveClass("text-primary");
+
+    const svg = container.querySelector("svg");
+    expect(svg).toHaveClass("lucide-info");
+    expect(svg).toHaveClass("text-primary");
   });
 
   it("applies the correct classes for warning variant", () => {
@@ -49,6 +53,10 @@ describe("InfoAlert", () => {
     expect(div).toHaveClass("bg-gold/10");
     expect(div).toHaveClass("border-gold/30");
     expect(div).toHaveClass("text-gold-dark");
+
+    const svg = container.querySelector("svg");
+    expect(svg).toHaveClass("lucide-circle-alert");
+    expect(svg).toHaveClass("text-gold-dark");
   });
 
   it("applies the correct classes for success variant", () => {
@@ -62,6 +70,10 @@ describe("InfoAlert", () => {
     expect(div).toHaveClass("bg-green-50");
     expect(div).toHaveClass("border-green-200");
     expect(div).toHaveClass("text-green-800");
+
+    const svg = container.querySelector("svg");
+    expect(svg).toHaveClass("lucide-circle-check-big");
+    expect(svg).toHaveClass("text-green-600");
   });
 
   it("applies the correct classes for error variant", () => {
@@ -75,6 +87,10 @@ describe("InfoAlert", () => {
     expect(div).toHaveClass("bg-destructive/10");
     expect(div).toHaveClass("border-destructive/30");
     expect(div).toHaveClass("text-destructive");
+
+    const svg = container.querySelector("svg");
+    expect(svg).toHaveClass("lucide-circle-x");
+    expect(svg).toHaveClass("text-destructive");
   });
 
   it("applies custom className", () => {
