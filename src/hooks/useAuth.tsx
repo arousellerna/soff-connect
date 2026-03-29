@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (error) throw error;
       setProfile(data as Profile);
     } catch (error) {
-      // Error fetching profile is ignored
+      console.error("Error fetching profile:", error instanceof Error ? error.message : "An unknown error occurred");
     } finally {
       setLoading(false);
     }
